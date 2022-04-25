@@ -2,7 +2,6 @@ import * as React from 'react'
 import { StyleSheet, FlatList } from 'react-native'
 import { Card } from 'react-native-paper'
 import Screen from '../Screen'
-import { meditations, MeditationItem } from '../../config/meditations'
 import Colors from '../../constants/Colors'
 import { Text, useThemeColor } from '../../components/Themed'
 
@@ -40,7 +39,7 @@ export default function Related() {
         style={styles.cards}
         horizontal
         showsHorizontalScrollIndicator={true}
-        data={meditations.anxiety}
+        data={null}
         renderItem={renderCard}
         keyExtractor={({ id }) => id}
       />

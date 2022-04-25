@@ -2,17 +2,48 @@ import * as React from 'react'
 import { StyleSheet, FlatList } from 'react-native'
 import {  Avatar, Button, Card, Title, Paragraph } from 'react-native-paper'
 import Screen from '../Screen'
-import { meditations, MeditationItem } from '../../config/meditations'
 import Colors from '../../constants/Colors'
 import { Text, useThemeColor } from '../../components/Themed'
+import { useEffect, useState } from "react";
+import { URL_PATH } from '../../config/main';
+// import LoadingScreen from '../../components/LoadingScreen';
 
 
-// const LeftContent = props => <Avatar.Icon {...props} icon="folder" />
+
+export default function ItemCard({ typeContent }: any) {
+
+  const urlToPopular: any = URL_PATH + '/categories/1/' + typeContent + '?page%5Blimit%5D=20';
+  const urlToTreding: any = URL_PATH + '/trending/' + typeContent;
+
+  const [popular, setPopular] = useState([]);
+  const [treding, setTreding] = useState([]);
+
+  const loadPopular = async () => {
+    const res = await fetch(
+      urlToPopular
+    );
+    const data = await res.json();
+    setPopular(data);
+  };
+
+  const loadRecent = async () => {
+    const res = await fetch(
+      urlToTreding
+    );
+    const data = await res.json();
+    setTreding(data);
+  };
+
+  useEffect(() => {
+      loadPopular();
+      loadRecent();
+  }, []);
 
 
-export default function ItemCard() {
 
-    const renderPopularCard = ({ item }: MeditationItem) => {
+  
+    const renderPopularCard = ({ item }: any) => {
+
         return (
             
           <Card
@@ -24,12 +55,12 @@ export default function ItemCard() {
             //   })
             // }
           >
-            <Card.Cover style={[styles.cardImage, styles.popularImage]} source={{ uri: 'https://media.kitsu.io/anime/poster_images/7991/tiny.jpg' }} />
+            <Card.Cover style={[styles.cardImage, styles.popularImage]} source={{ uri: item.attributes.coverImage ? item.attributes.coverImage.tiny : 'https://media.kitsu.io/anime/poster_images/7991/tiny.jpg' }} />
             <Card.Title
               titleStyle={[styles.cardTitle, { color: 'black' }]}
               subtitleStyle={styles.cardSubtitle}
-              title={item.title}
-              subtitle={item.subtitle}
+              title={item.attributes.canonicalTitle}
+              subtitle={item.attributes.description}
             />
           </Card>
 
@@ -37,7 +68,7 @@ export default function ItemCard() {
       }
 
 
-      const renderCard = ({ item }: MeditationItem) => {
+      const renderCard = ({ item }: any) => {
         return (
           <Card
             style={styles.card}
@@ -47,17 +78,19 @@ export default function ItemCard() {
             //   })
             // }
           >
-            <Card.Cover style={styles.cardImage} source={{ uri: 'https://media.kitsu.io/anime/poster_images/7991/tiny.jpg' }}  />
+            <Card.Cover style={styles.cardImage} source={{ uri: item.attributes.coverImage ? item.attributes.coverImage.tiny : 'https://media.kitsu.io/anime/poster_images/7991/tiny.jpg' }}  />
             <Card.Title
               titleStyle={[styles.cardTitle, { color: 'black' }]}
               subtitleStyle={styles.cardSubtitle}
-              title={item.title}
-              subtitle={item.subtitle}
+              title={item.attributes.canonicalTitle}
+              subtitle={item.attributes.description}
             />
           </Card>
         )
       }
 
+      // console.log(popular.data)
+      // console.log(treding.data)
   return (
     <Screen scroll>
       <Text style={styles.title}>POPULAR</Text>
@@ -65,7 +98,7 @@ export default function ItemCard() {
         style={styles.cards}
         horizontal
         showsHorizontalScrollIndicator={false}
-        data={meditations.popular}
+        data={popular.data}
         renderItem={renderPopularCard}
         keyExtractor={({ id }) => id}
       />
@@ -75,7 +108,7 @@ export default function ItemCard() {
         style={styles.cards}
         horizontal
         showsHorizontalScrollIndicator={true}
-        data={meditations.anxiety}
+        data={treding.data}
         renderItem={renderCard}
         keyExtractor={({ id }) => id}
       />
@@ -102,7 +135,7 @@ const styles = StyleSheet.create({
       height: 135,
     },
     popularImage: {
-      height: 250,
+      height: 225,
     },
     cardContent: {
       flex: 1,

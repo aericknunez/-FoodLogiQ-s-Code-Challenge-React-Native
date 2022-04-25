@@ -7,11 +7,17 @@ import { ColorSchemeName, Pressable } from 'react-native';
 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
+
+
 import ModalScreen from '../screens/ModalScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
 import HomeScreen from '../screens/HomeScreen';
 import DetailScreen from '../screens/DetailScreen';
+import SearchScreen from '../screens/SearchScreen'
 import FavoritesScreen from '../screens/FavoritesScreen';
+import CategoryScreen from '../screens/CategoryScreen';
+
+
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
 
@@ -36,6 +42,10 @@ function RootNavigator() {
     <Stack.Navigator>
       <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
+      <Stack.Screen name="TabSearch" component={SearchScreen} options={{ title: 'Search' }} />
+      <Stack.Screen name="TabDetails" component={DetailScreen} options={{ title: 'Details' }} />
+
+
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
         <Stack.Screen name="Modal" component={ModalScreen} />
       </Stack.Group>
@@ -58,12 +68,22 @@ function BottomTabNavigator() {
       screenOptions={{
           tabBarActiveTintColor: Colors[colorScheme].tint,
       }}>
-        
+
+
       <BottomTab.Screen
+        name="TabCategory"
+        component={CategoryScreen}
+        options={{
+          title: 'Categories',
+          tabBarIcon: ({ color }) => <TabBarIcon name="search" color={color} />,
+        }}
+      />     
+
+<BottomTab.Screen
         name="TabHome"
         component={HomeScreen}
         options={({ navigation }: RootTabScreenProps<'TabHome'>) => ({
-          title: 'Inicio',
+          title: 'Home',
           tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
           headerRight: () => (
             <Pressable
@@ -81,20 +101,13 @@ function BottomTabNavigator() {
           ),
         })}
       />
-      <BottomTab.Screen
-        name="TabDetails"
-        component={DetailScreen}
-        options={{
-          title: 'Detalles',
-          tabBarIcon: ({ color }) => <TabBarIcon name="star" color={color} />,
-        }}
-      />
+
 
     <BottomTab.Screen
         name="TabFavorites"
         component={FavoritesScreen}
         options={{
-          title: 'Favoritos',
+          title: 'I love it',
           tabBarIcon: ({ color }) => <TabBarIcon name="heart" color={color} />,
         }}
       />

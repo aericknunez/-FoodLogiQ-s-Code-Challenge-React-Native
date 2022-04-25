@@ -28,7 +28,26 @@ export type RootTabParamList = {
   TabHome: undefined;
   TabDetails: undefined;
   TabFavorites: undefined;
+  TabSearch: { typeContent: undefined };
+
 };
+
+export type ModalParamList = {
+  HomeScreen: undefined;
+  navigate: any;
+  TabSearch: {
+    iden: any;
+  }
+}
+
+
+export type SearchParamList = {
+  navigate: any;
+  TabSearch: {
+    typeContent: any;
+  }
+}
+
 
 export type RootTabScreenProps<Screen extends keyof RootTabParamList> = CompositeScreenProps<
   BottomTabScreenProps<RootTabParamList, Screen>,

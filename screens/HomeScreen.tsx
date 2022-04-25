@@ -1,9 +1,7 @@
 import { StyleSheet, SafeAreaView, Text  } from 'react-native';
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { RootTabScreenProps } from '../types';
-
-// import { SafeAreaView } from "react-native-safe-area-context";
-import ItemCard from './home/ItemCard';
+import ItemScroll from './home/ItemsScroll';
 
 
 export default function HomeScreen({ navigation }: RootTabScreenProps<'TabHome'>) {
@@ -11,7 +9,7 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'TabHome'>
 
   return (
     <SafeAreaView style={styles.container}>
-        <ItemCard />
+        <ItemScroll />
     </SafeAreaView>
   );
 

@@ -1,23 +1,20 @@
 import * as React from 'react'
 import { StyleSheet, FlatList } from 'react-native'
-import {  Avatar, Button, Card, Title, Paragraph } from 'react-native-paper'
+import { Card } from 'react-native-paper'
 import Screen from '../Screen'
 import { meditations, MeditationItem } from '../../config/meditations'
 import Colors from '../../constants/Colors'
 import { Text, useThemeColor } from '../../components/Themed'
 
 
-const LeftContent = props => <Avatar.Icon {...props} icon="folder" />
+// const LeftContent = props => <Avatar.Icon {...props} icon="folder" />
 
 
+export default function Related() {
 
-export default function ItemCard() {
-
-    const renderPopularCard = ({ item }: MeditationItem) => {
+      const renderCard = ({ item }: MeditationItem) => {
         return (
-            
           <Card
-            elevation={1}
             style={styles.card}
             // onPress={() =>
             //   navigation.navigate('PlayScreen', {
@@ -25,41 +22,29 @@ export default function ItemCard() {
             //   })
             // }
           >
-            <Card.Cover style={[styles.cardImage, styles.popularImage]} source={{ uri: 'https://media.kitsu.io/anime/poster_images/7991/tiny.jpg' }} />
+            <Card.Cover style={styles.cardImage} source={{ uri: 'https://media.kitsu.io/anime/poster_images/7991/tiny.jpg' }}  />
             <Card.Title
-              titleStyle={[styles.cardTitle, { color: 'back' }]}
+              titleStyle={[styles.cardTitle, { color: 'black' }]}
               subtitleStyle={styles.cardSubtitle}
               title={item.title}
               subtitle={item.subtitle}
             />
           </Card>
-
-    //     <Card>
-    //     <Card.Title title="Card Title" subtitle="Card Subtitle" left={LeftContent} />
-    //     <Card.Content>
-    //       <Title>Card title</Title>
-    //       <Paragraph>Card content</Paragraph>
-    //     </Card.Content>
-    //     <Card.Cover source={{ uri: 'https://picsum.photos/700' }} />
-    //     <Card.Actions>
-    //       <Button>Cancel</Button>
-    //       <Button>Ok</Button>
-    //     </Card.Actions>
-    //   </Card>
         )
       }
 
   return (
     <Screen scroll>
-      {/* <Text style={styles.title}>POPULAR</Text> */}
+    <Text style={styles.title}>RELATED</Text>
       <FlatList
         style={styles.cards}
         horizontal
-        showsHorizontalScrollIndicator={false}
-        data={meditations.popular}
-        renderItem={renderPopularCard}
+        showsHorizontalScrollIndicator={true}
+        data={meditations.anxiety}
+        renderItem={renderCard}
         keyExtractor={({ id }) => id}
       />
+
     </Screen>
   )
 

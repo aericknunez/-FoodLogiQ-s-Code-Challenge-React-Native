@@ -1,5 +1,5 @@
 
-import { ScrollView, Text, View, TextInput, StyleSheet, FlatList, SafeAreaView  } from 'react-native';
+import { View, TextInput, FlatList, SafeAreaView  } from 'react-native';
 import React, { useState, useEffect } from "react";
 import { RootTabScreenProps } from '../types';
 import { getData } from '../config/main';
@@ -42,7 +42,7 @@ export default function CategoryScreen({ navigation }: RootTabScreenProps<'TabCa
     <View>
     <View style={[tw`flex justify-center`]}>
               <View style={[tw`mb-3`]}>
-                <TextInput
+                {/* <TextInput
                   style={[tw`
                   w-full
                   px-3
@@ -59,7 +59,7 @@ export default function CategoryScreen({ navigation }: RootTabScreenProps<'TabCa
                   onChangeText={(text) => {
                     setUrlsearch(URL_PATH + "/anime?filter[text]="+ text)
                   }}
-                />
+                /> */}
               </View>
           </View>
           <SafeAreaView>

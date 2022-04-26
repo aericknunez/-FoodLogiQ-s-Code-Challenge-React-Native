@@ -9,15 +9,18 @@ import { useNavigation } from '@react-navigation/native';
 
 export default function ItemCard({ item }: any) {
   
-  // const navigation = useNavigation<SearchParamList, 'TabSearch'>(); 
-    const toGo = ()=> {
-      console.log("Hola")
-    }
+  // const navigation = useNavigation<SearchParamList, 'TabDetails'>(); 
+
 
         return (
                 <View>
                 <TouchableOpacity
-                      onPress={ toGo }
+                      // onPress={() =>
+                      //   navigation.navigate('TabDetails', {
+                      //     typeContent: item.id,
+                      //     typeSearch: item.type,
+                      //   })
+                      // }
                 >
                 <View style={[tw`shadow-lg border rounded-lg container flex flex-row mx-auto justify-center overflow-hidden mt-2 mr-3`]} >
                     <View style={[tw`w-20 h-20 justify-center items-center mr-4 m-2`]}>

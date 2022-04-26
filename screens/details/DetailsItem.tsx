@@ -16,7 +16,6 @@ export default function DetailsItem(props:any) {
 
         <View style={[tw`h-52 flex shadow-lg rounded-t-lg bg-white overflow-hidden`]}>
         <Image source={{ uri: props.props.attributes.coverImage ? props.props.attributes.coverImage.tiny : 'https://media.kitsu.io/anime/cover_images/7991/original.png' }} style={[tw`absolute w-full h-full mb-4`]} />
-        {/* <Image source={{ uri: 'https://media.kitsu.io/anime/poster_images/7991/tiny.jpg' }} style={[tw`border-2 rounded-lg -right-72 -bottom-36 h-24 w-20 mb-4`]} /> */}
         </View>
         <View style={[tw`shadow-lg rounded-b-lg bg-white overflow-hidden`]}>
         <View style={[tw`pl-4 bg-white`]}>
@@ -44,18 +43,9 @@ export default function DetailsItem(props:any) {
 
         {props.props.attributes.youtubeVideoId ? <YotubeButtom url={props.props.attributes.youtubeVideoId} /> : <Text></Text>}
     
-        <CharterScroll chapters={props.episodes} />
-
-        {/* <View style={[tw`mx-3 mb-3`]}>
-        <Text style={[tw`mt-3 text-base font-bold`]}>Episodios</Text>
-        <FlatList
-        data={props.episodes}
-        renderItem={AnotherEpisodes}
-        keyExtractor={({ id }: any) => id}
-        />
-        </View> */}
+        { props.props.attributes.episodeCount ? <CharterScroll chapters={props.episodes} /> : <Text></Text>}
         
-
+      
         <View style={styles.container}>
         <Related />
         </View>

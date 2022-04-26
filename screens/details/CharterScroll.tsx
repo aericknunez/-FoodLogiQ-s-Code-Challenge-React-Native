@@ -3,9 +3,11 @@ import { StyleSheet, FlatList, View, Text } from 'react-native'
 import {  Avatar, Button, Card, Title, Paragraph, ActivityIndicator } from 'react-native-paper'
 import Screen from '../Screen'
 import Colors from '../../constants/Colors'
-import tw from 'tailwind-react-native-classnames'
+import { useNavigation } from '@react-navigation/native';
+
 
 export default function CharterScroll({ chapters }: any) {
+    const navigation = useNavigation<SearchParamList, 'TabChapter'>(); 
 
       const renderCard = ({ item }: any) => {
 
@@ -13,13 +15,12 @@ export default function CharterScroll({ chapters }: any) {
           <Card
             style={styles.card}
             onPress={() =>
-              navigation.navigate('TabDetails', {
-                typeContent: item.id,
-                typeSearch: typeContent,
+              navigation.navigate('TabChapter', {
+                charter: item.id,
               })
             }
           >
-            <Card.Cover style={styles.cardImage} source={{ uri: item.attributes.thumbnail ? item.attributes.thumbnail.tiny : 'https://media.kitsu.io/anime/poster_images/7991/tiny.jpg' }} />
+            <Card.Cover style={styles.cardImage} source={{ uri: item.attributes.thumbnail ? item.attributes.thumbnail.original : 'https://media.kitsu.io/anime/poster_images/7991/tiny.jpg' }} />
             <Card.Title
               titleStyle={[styles.cardTitle, { color: 'black' }]}
               subtitleStyle={styles.cardSubtitle}
@@ -79,10 +80,6 @@ const styles = StyleSheet.create({
     cardParagraph: {
       color: Colors.light.purple900,
       fontWeight: '600',
-    },
-    downloadButton: {
-      position: 'relative',
-      top: -6,
     },
     cards: {
       marginBottom: 30,

@@ -1,14 +1,13 @@
 import * as React from 'react'
-import { StyleSheet, FlatList } from 'react-native'
-import {  Avatar, Button, Card, Title, Paragraph } from 'react-native-paper'
+import { StyleSheet, FlatList, View } from 'react-native'
+import {  Avatar, Button, Card, Title, Paragraph, ActivityIndicator } from 'react-native-paper'
 import Screen from '../Screen'
 import Colors from '../../constants/Colors'
 import { Text, useThemeColor } from '../../components/Themed'
 import { useEffect, useState } from "react";
 import { URL_PATH } from '../../config/main';
-// import LoadingScreen from '../../components/LoadingScreen';
 import { useNavigation } from '@react-navigation/native';
-
+import { getData } from '../../config/main'
 
 
 export default function ItemCard({ typeContent }: any) {
@@ -21,28 +20,40 @@ export default function ItemCard({ typeContent }: any) {
   const [popular, setPopular] = useState([]);
   const [treding, setTreding] = useState([]);
 
-  const loadPopular = async () => {
-    const res = await fetch(
-      urlToPopular
-    );
-    const data = await res.json();
-    setPopular(data);
-  };
-
-  const loadRecent = async () => {
-    const res = await fetch(
-      urlToTreding
-    );
-    const data = await res.json();
-    setTreding(data);
-  };
 
   useEffect(() => {
-      loadPopular();
-      loadRecent();
+    (async () => {
+      await loadDataItem();
+      await loadTrending();
+    })();
   }, []);
 
 
+  const loadDataItem = async () => {
+    try {
+      const response = await getData(urlToPopular);
+      setPopular(response);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const loadTrending = async () => {
+    try {
+      const response = await getData(urlToTreding);
+      setTreding(response);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  if (!popular.data && !treding.data) {
+    return (
+      <View>
+          <ActivityIndicator style={ StyleSheet.create({flex: 1, top: 150}) } />
+      </View>
+    );
+  }
 
   
     const renderPopularCard = ({ item }: any) => {

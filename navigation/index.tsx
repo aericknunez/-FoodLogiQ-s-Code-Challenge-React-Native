@@ -16,6 +16,7 @@ import DetailScreen from '../screens/DetailScreen';
 import SearchScreen from '../screens/SearchScreen'
 import FavoritesScreen from '../screens/FavoritesScreen';
 import CategoryScreen from '../screens/CategoryScreen';
+import ChapterScreen from '../screens/ChapterScreen';
 
 
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
@@ -44,6 +45,7 @@ function RootNavigator() {
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
       <Stack.Screen name="TabSearch" component={SearchScreen} options={{ title: 'Search' }} />
       <Stack.Screen name="TabDetails" component={DetailScreen} options={{ title: 'Details' }} />
+      <Stack.Screen name="TabChapter" component={ChapterScreen} options={{ title: 'Chapter' }} />
 
 
       {/* <Stack.Group screenOptions={{ presentation: 'modal' }}>

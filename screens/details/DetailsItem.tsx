@@ -11,6 +11,7 @@ import CharterScroll from './CharterScroll';
 
 export default function DetailsItem(props:any) {
 
+
   return (
     <View >
 

@@ -1,9 +1,11 @@
 
-import { ScrollView, Text, View, TextInput, StyleSheet, FlatList  } from 'react-native';
+import { ScrollView, Text, View, TextInput, StyleSheet, FlatList, SafeAreaView  } from 'react-native';
 import React, { useState, useEffect } from "react";
 import { RootTabScreenProps } from '../types';
 import { getData } from '../config/main';
 import { URL_PATH } from '../config/main';
+import CardItem from './search/CardItem';
+import tw from 'tailwind-react-native-classnames';
 
 export default function CategoryScreen({ navigation }: RootTabScreenProps<'TabCategory'>) {
 
@@ -11,7 +13,7 @@ export default function CategoryScreen({ navigation }: RootTabScreenProps<'TabCa
   const [elements, setElements] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
   const [search, setSearch] = useState("");
-  const [urlsearch, setUrlsearch] = useState(URL_PATH + "/trending/anime");
+  const [urlsearch, setUrlsearch] = useState(URL_PATH + "/anime");
 
 
   useEffect(() => {
@@ -22,72 +24,55 @@ export default function CategoryScreen({ navigation }: RootTabScreenProps<'TabCa
 
 
   const loadData = async () => {
-    if (search == "") {
-      setUrlsearch(URL_PATH + "/trending/anime")
-    }
     try {
       const response = await getData(urlsearch);
-      setElements(response);
+      // setElements(response);
+      setElements([...elements, ...response.data]);
+
+      setUrlsearch(response.links.next);
     } catch (error) {
       console.error(error);
     }
   };
 
-console.log(search)
-console.log(urlsearch)
+
+
+
   return (
-    <ScrollView>
-          <View style={styles.container}>
-              <View style={styles.header}>
-                <Text style={styles.title}>Kitsu</Text>
+    <View>
+    <View style={[tw`flex justify-center`]}>
+              <View style={[tw`mb-3`]}>
                 <TextInput
-                  style={styles.searchInput}
+                  style={[tw`
+                  w-full
+                  px-3
+                  py-1.5
+                  text-base
+                  font-normal
+                  text-gray-700
+                  bg-white
+                  border border-solid border-gray-300
+                  rounded
+                  m-0`]}
                   placeholder="Search a Element"
                   placeholderTextColor="#858585"
                   onChangeText={(text) => {
-                    setUrlsearch(URL_PATH + "/anime?filter[text]="+ text), setSearch(text)
+                    setUrlsearch(URL_PATH + "/anime?filter[text]="+ text)
                   }}
                 />
               </View>
           </View>
-
-          <FlatList
-            style={styles.list}
-            data={elements}
-            showsVerticalScrollIndicator={false}
-            renderItem={({ item }) => <CardItem element={item} />}
-      />
-
-    </ScrollView>
+          <SafeAreaView>
+              {/* <CardItem  element={elements} /> */}
+              <FlatList
+                data={elements}
+                renderItem={CardItem}
+                keyExtractor={({ id }) => id}
+                onEndReached={loadData}
+                onEndReachedThreshold={0.1}
+              />
+          </SafeAreaView>
+    </View>
   );
 
 }
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: "#141414",
-    flex: 1,
-    alignItems: "center",
-  },
-  header: {
-    flexDirection: "row",
-    width: "90%",
-    justifyContent: "space-between",
-    marginBottom: 10,
-  },
-  title: {
-    fontSize: 20,
-    color: "#fff",
-    marginTop: 10,
-  },
-  list: {
-    width: "90%",
-  },
-  searchInput: {
-    color: "#fff",
-    borderBottomColor: "#4657CE",
-    borderBottomWidth: 1,
-    width: "70%",
-    textAlign: "center",
-  },
-});

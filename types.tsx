@@ -28,6 +28,7 @@ export type RootTabParamList = {
   TabHome: undefined;
   TabDetails: undefined;
   TabFavorites: undefined;
+  Modal: { typeContent: undefined };
   TabSearch: { typeContent: undefined };
 
 };
@@ -35,8 +36,8 @@ export type RootTabParamList = {
 export type ModalParamList = {
   HomeScreen: undefined;
   navigate: any;
-  TabSearch: {
-    iden: any;
+  typeContent: {
+    typeContent: any;
   }
 }
 

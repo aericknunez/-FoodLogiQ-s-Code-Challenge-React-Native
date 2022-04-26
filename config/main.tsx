@@ -7,8 +7,7 @@ export function getUrlFormated(endpointUrl: string) {
 }
 
 
-
-export async function getAllManga(url: string) {
+export async function getData(url: string) {
   try {
     const response = await fetch(url);
     const result = await response.json();
@@ -17,5 +16,3 @@ export async function getAllManga(url: string) {
     throw error;
   }
 }
-
-

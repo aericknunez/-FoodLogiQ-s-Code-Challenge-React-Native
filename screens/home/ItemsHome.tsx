@@ -1,15 +1,14 @@
 import * as React from 'react'
-import { Image, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Image, StyleSheet, TouchableOpacity } from 'react-native'
 import {  Avatar, Button, Card, Title, Paragraph } from 'react-native-paper'
 import Screen from '../Screen'
-import { Text, View } from '../../components/Themed'
+import { Text } from '../../components/Themed'
 import tw from 'tailwind-react-native-classnames';
 
 import { useNavigation } from '@react-navigation/native';
 
 import { home } from '../../config/interfaces';
 import { SearchParamList } from '../../types'
-
   
   
 export default function ItemHome(props: home): JSX.Element {
@@ -17,31 +16,31 @@ export default function ItemHome(props: home): JSX.Element {
     const navigation = useNavigation<SearchParamList, 'TabSearch'>(); 
     const type = props.name.toLowerCase() ;
         return (
-            
-            <View style={styles.container}>
+
+            <View style={[tw`mt-8 mx-4`]}>
                 <TouchableOpacity
-                            onPress={() =>
-                                navigation.navigate('TabSearch', {
-                                    typeContent: type,
-                                })
-                            }
+                    onPress={() =>
+                        navigation.navigate('TabSearch', {
+                            typeContent: type,
+                        })
+                    }
                 >
-                <View style={[tw`shadow-lg rounded-2xl bg-white p-4 w-72`]}>
-                    <View style={[tw`justify-center items-center`]}>
-                        <View style={[tw`flex-shrink-0  h-24 w-72`]}>
-                            <View style={[tw`relative mt-1`]}>
-                            <Image source={{ uri: props.img }} style={[tw`mx-auto  h-full w-full`]} />
-                            </View>
-                        </View>
-                        <View style={[tw`flex flex-col`]}>
-                            <Text style={[tw`text-gray-600 text-lg font-medium font-bold`]}>
+                <View style={[tw`h-52 flex shadow-lg rounded-t-lg bg-white overflow-hidden`]}>
+                <Image source={{ uri: props.img }} style={[tw`absolute w-full h-full mb-4`]} />
+                </View>
+
+
+                <View style={[tw`shadow-lg rounded-b-lg bg-white overflow-hidden`]}>
+                    <View style={[tw`pl-4 bg-white`]}>
+                        <Text style={[tw`text-gray-800 font-medium text-base mb-0 text-4xl text-center my-1`]}>
                                 {props.name}
-                            </Text>
-                        </View>
+                        </Text>
                     </View>
                 </View>
-                </TouchableOpacity>
+               </TouchableOpacity>
+
             </View>
+
   )
 
 }

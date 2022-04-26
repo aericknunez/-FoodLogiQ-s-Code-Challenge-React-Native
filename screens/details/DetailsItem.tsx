@@ -1,57 +1,60 @@
 import * as React from 'react'
-import { Image, StyleSheet } from 'react-native'
+import { Image, StyleSheet, FlatList, TouchableOpacity, Linking } from 'react-native'
+import * as WebBrowser from 'expo-web-browser';
 
-import Screen from '../Screen'
 import { Text, View } from '../../components/Themed'
-import { LoadingScreen } from '../../components/LoadingScreen'
-import FavouriteButton from '../../components/FavouriteButton'
-import AnotherEpisodes from './AnotherEpisodes'
 import Rating from './Rating'
 import Related from './Related'
 import tw from 'tailwind-react-native-classnames';
+import YotubeButtom from './YoutubeButtom';
+import CharterScroll from './CharterScroll';
 
-export default function DetailsItem() {
+export default function DetailsItem(props:any) {
 
   return (
     <View >
 
         <View style={[tw`h-52 flex shadow-lg rounded-t-lg bg-white overflow-hidden`]}>
-        <Image source={{ uri: 'https://media.kitsu.io/anime/cover_images/7991/original.png' }} style={[tw`absolute w-full h-full mb-4`]} />
+        <Image source={{ uri: props.props.attributes.coverImage ? props.props.attributes.coverImage.tiny : 'https://media.kitsu.io/anime/cover_images/7991/original.png' }} style={[tw`absolute w-full h-full mb-4`]} />
         {/* <Image source={{ uri: 'https://media.kitsu.io/anime/poster_images/7991/tiny.jpg' }} style={[tw`border-2 rounded-lg -right-72 -bottom-36 h-24 w-20 mb-4`]} /> */}
         </View>
         <View style={[tw`shadow-lg rounded-b-lg bg-white overflow-hidden`]}>
-        <View style={[tw`pl-4`]}>
+        <View style={[tw`pl-4 bg-white`]}>
                 <Text style={[tw`text-gray-800 font-medium text-base mb-0`]}>
-                      Watashi ga Motenai no wa Dou Kangaetemo Omaera ga Warui!: Motenaishi, Nazomeite Miru
+                     { props.props.attributes.canonicalTitle ? props.props.attributes.canonicalTitle : 'UnKnow' }
                 </Text>
             </View>
-            <View>
+            <View style={[tw`bg-white`]}>
               <Text style={[tw`pl-4 text-gray-400 text-xs`]}>
-                The 13th episode of the TV anime bundled with the special limited first edition of the 7th manga volume.
+              { props.props.attributes.description ? props.props.attributes.description : 'UnKnow' }
               </Text>
-              <Text style={[tw`text-indigo-500 text-xl text-xs -right-72`]}>
-                    11 Eps
+            </View>
+            <View style={[tw`content-end	my-4 ml-72 bg-white`]}>
+                <Text style={[tw`text-indigo-500 text-xl text-lg`]}>
+                    { props.props.attributes.episodeCount ? props.props.attributes.episodeCount  : '0' } Eps
                 </Text>
             </View>
         </View>
 
 
 
-        <Rating />
+        <Rating score={props.props.attributes.averageRating} rating={props.props.attributes.ratingRank} popularity={props.props.attributes.popularityRank} />
 
-        <View style={[tw`mx-3 mb-3`]}>
+
+
+        {props.props.attributes.youtubeVideoId ? <YotubeButtom url={props.props.attributes.youtubeVideoId} /> : <Text></Text>}
+    
+        <CharterScroll chapters={props.episodes} />
+
+        {/* <View style={[tw`mx-3 mb-3`]}>
         <Text style={[tw`mt-3 text-base font-bold`]}>Episodios</Text>
-        <AnotherEpisodes />
-        <AnotherEpisodes />
-        <AnotherEpisodes />
-        <AnotherEpisodes />
-        <AnotherEpisodes />
-        <AnotherEpisodes />
-        <AnotherEpisodes />
-        <AnotherEpisodes />
-        <AnotherEpisodes />
-        <AnotherEpisodes />
-        </View>
+        <FlatList
+        data={props.episodes}
+        renderItem={AnotherEpisodes}
+        keyExtractor={({ id }: any) => id}
+        />
+        </View> */}
+        
 
         <View style={styles.container}>
         <Related />
@@ -62,6 +65,7 @@ export default function DetailsItem() {
     
   )
 }
+
 
 const styles = StyleSheet.create({
   container: {

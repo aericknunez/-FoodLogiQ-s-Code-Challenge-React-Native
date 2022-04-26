@@ -7,10 +7,13 @@ import { Text, useThemeColor } from '../../components/Themed'
 import { useEffect, useState } from "react";
 import { URL_PATH } from '../../config/main';
 // import LoadingScreen from '../../components/LoadingScreen';
+import { useNavigation } from '@react-navigation/native';
 
 
 
 export default function ItemCard({ typeContent }: any) {
+
+  const navigation = useNavigation<SearchParamList, 'TabDetails'>(); 
 
   const urlToPopular: any = URL_PATH + '/categories/1/' + typeContent + '?page%5Blimit%5D=20';
   const urlToTreding: any = URL_PATH + '/trending/' + typeContent;
@@ -49,11 +52,12 @@ export default function ItemCard({ typeContent }: any) {
           <Card
             elevation={1}
             style={styles.card}
-            // onPress={() =>
-            //   navigation.navigate('PlayScreen', {
-            //     id: item.id,
-            //   })
-            // }
+            onPress={() =>
+              navigation.navigate('TabDetails', {
+                typeContent: item.id,
+                typeSearch: typeContent,
+              })
+            }
           >
             <Card.Cover style={[styles.cardImage, styles.popularImage]} source={{ uri: item.attributes.coverImage ? item.attributes.coverImage.tiny : 'https://media.kitsu.io/anime/poster_images/7991/tiny.jpg' }} />
             <Card.Title
@@ -69,14 +73,16 @@ export default function ItemCard({ typeContent }: any) {
 
 
       const renderCard = ({ item }: any) => {
+
         return (
           <Card
             style={styles.card}
-            // onPress={() =>
-            //   navigation.navigate('PlayScreen', {
-            //     id: item.id,
-            //   })
-            // }
+            onPress={() =>
+              navigation.navigate('TabDetails', {
+                typeContent: item.id,
+                typeSearch: typeContent,
+              })
+            }
           >
             <Card.Cover style={styles.cardImage} source={{ uri: item.attributes.coverImage ? item.attributes.coverImage.tiny : 'https://media.kitsu.io/anime/poster_images/7991/tiny.jpg' }}  />
             <Card.Title

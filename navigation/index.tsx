@@ -46,9 +46,11 @@ function RootNavigator() {
       <Stack.Screen name="TabDetails" component={DetailScreen} options={{ title: 'Details' }} />
 
 
-      <Stack.Group screenOptions={{ presentation: 'modal' }}>
+      {/* <Stack.Group screenOptions={{ presentation: 'modal' }}>
         <Stack.Screen name="Modal" component={ModalScreen} />
-      </Stack.Group>
+      </Stack.Group> */}
+      <Stack.Screen name="Modal" component={ModalScreen} options={{ title: 'Details' }}  />
+
     </Stack.Navigator>
   );
 }
@@ -79,28 +81,16 @@ function BottomTabNavigator() {
         }}
       />     
 
-<BottomTab.Screen
+
+
+    <BottomTab.Screen
         name="TabHome"
         component={HomeScreen}
         options={({ navigation }: RootTabScreenProps<'TabHome'>) => ({
           title: 'Home',
-          tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
-          headerRight: () => (
-            <Pressable
-              onPress={() => navigation.navigate('Modal')}
-              style={({ pressed }) => ({
-                opacity: pressed ? 0.5 : 1,
-              })}>
-              <FontAwesome
-                name="info-circle"
-                size={25}
-                color={Colors[colorScheme].text}
-                style={{ marginRight: 15 }}
-              />
-            </Pressable>
-          ),
+          tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />
         })}
-      />
+    />
 
 
     <BottomTab.Screen

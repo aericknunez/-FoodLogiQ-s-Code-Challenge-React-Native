@@ -6,6 +6,9 @@ import { getData } from '../config/main';
 import { URL_PATH } from '../config/main';
 import CardItem from './search/CardItem';
 import tw from 'tailwind-react-native-classnames';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { STORAGE } from '../config/main';
+
 
 export default function CategoryScreen({ navigation }: RootTabScreenProps<'TabCategory'>) {
 
@@ -28,14 +31,23 @@ export default function CategoryScreen({ navigation }: RootTabScreenProps<'TabCa
       const response = await getData(urlsearch);
       // setElements(response);
       setElements([...elements, ...response.data]);
-
       setUrlsearch(response.links.next);
+      console.log(response.links.next)
     } catch (error) {
       console.error(error);
     }
   };
 
 
+
+// / Savign data on local storage
+  // const storeData = async (value:any) => {
+  //   try {
+  //     await AsyncStorage.setItem('STORAGE', value)
+  //   } catch (e) {
+  //     console.log(e)
+  //   }
+  // }
 
 
   return (

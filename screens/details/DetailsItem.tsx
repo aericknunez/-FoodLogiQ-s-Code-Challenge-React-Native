@@ -48,7 +48,7 @@ export default function DetailsItem(props:any) {
         
       
         <View style={styles.container}>
-        <Related />
+        {/* <Related /> */}
         </View>
 
 

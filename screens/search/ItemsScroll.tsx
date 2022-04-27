@@ -110,7 +110,7 @@ export default function ItemCard({ typeContent }: any) {
       // console.log(treding.data)
   return (
     <Screen scroll>
-      <Text style={styles.title}>POPULAR</Text>
+      <Text style={styles.title}>MOST POPULAR</Text>
       <FlatList
         style={styles.cards}
         horizontal
@@ -120,7 +120,7 @@ export default function ItemCard({ typeContent }: any) {
         keyExtractor={({ id }) => id}
       />
 
-    <Text style={styles.title}>MAS VISTO</Text>
+    <Text style={styles.title}>HIGHES RATED</Text>
       <FlatList
         style={styles.cards}
         horizontal

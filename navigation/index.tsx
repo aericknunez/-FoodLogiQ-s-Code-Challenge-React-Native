@@ -43,7 +43,7 @@ function RootNavigator() {
     <Stack.Navigator>
       <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
-      <Stack.Screen name="TabSearch" component={SearchScreen} options={{ title: 'Search' }} />
+      <Stack.Screen name="TabSearch" component={SearchScreen} options={{ title: 'Rated' }} />
       <Stack.Screen name="TabDetails" component={DetailScreen} options={{ title: 'Details' }} />
       <Stack.Screen name="TabChapter" component={ChapterScreen} options={{ title: 'Chapter' }} />
 
@@ -78,7 +78,7 @@ function BottomTabNavigator() {
         name="TabCategory"
         component={CategoryScreen}
         options={{
-          title: 'Categories',
+          title: 'ALL ANIME',
           tabBarIcon: ({ color }) => <TabBarIcon name="search" color={color} />,
         }}
       />     
@@ -89,7 +89,7 @@ function BottomTabNavigator() {
         name="TabHome"
         component={HomeScreen}
         options={({ navigation }: RootTabScreenProps<'TabHome'>) => ({
-          title: 'Home',
+          title: 'HOME',
           tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />
         })}
     />
@@ -99,7 +99,7 @@ function BottomTabNavigator() {
         name="TabFavorites"
         component={FavoritesScreen}
         options={{
-          title: 'I love it',
+          title: 'I LOVE IT',
           tabBarIcon: ({ color }) => <TabBarIcon name="heart" color={color} />,
         }}
       />

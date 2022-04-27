@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { StyleSheet, FlatList, View } from 'react-native'
+import { StyleSheet, FlatList, View, TouchableOpacity } from 'react-native'
 import {  Avatar, Button, Card, Title, Paragraph, ActivityIndicator } from 'react-native-paper'
 import Screen from '../Screen'
 import Colors from '../../constants/Colors'
@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { URL_PATH } from '../../config/main';
 import { useNavigation } from '@react-navigation/native';
 import { getData } from '../../config/main'
+import { Loader } from '../../components/Accesories'
 
 
 export default function ItemCard({ typeContent }: any) {
@@ -48,11 +49,7 @@ export default function ItemCard({ typeContent }: any) {
   };
 
   if (!popular.data && !treding.data) {
-    return (
-      <View>
-          <ActivityIndicator style={ StyleSheet.create({flex: 1, top: 150}) } />
-      </View>
-    );
+    return ( <Loader /> );
   }
 
   
@@ -110,7 +107,15 @@ export default function ItemCard({ typeContent }: any) {
       // console.log(treding.data)
   return (
     <Screen scroll>
-      <Text style={styles.title}>MOST POPULAR</Text>
+      <TouchableOpacity
+                    onPress={() =>
+                      navigation.navigate('AllScreen', {
+                          typeContent: typeContent,
+                      })
+                  }
+      >
+          <Text style={styles.title}>SEE THE MOST POPULAR</Text>
+      </TouchableOpacity>
       <FlatList
         style={styles.cards}
         horizontal
@@ -120,7 +125,16 @@ export default function ItemCard({ typeContent }: any) {
         keyExtractor={({ id }) => id}
       />
 
-    <Text style={styles.title}>HIGHES RATED</Text>
+      <TouchableOpacity 
+                    onPress={() =>
+                      navigation.navigate('AllScreen', {
+                          typeContent: typeContent,
+                      })
+                  }
+      >
+        
+       <Text style={styles.title}>HIGHES RATED</Text>
+      </TouchableOpacity>
       <FlatList
         style={styles.cards}
         horizontal

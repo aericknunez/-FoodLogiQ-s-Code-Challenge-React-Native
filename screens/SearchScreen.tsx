@@ -33,6 +33,7 @@ export default function SearchScreen({ navigation  }: RootTabScreenProps<'TabSea
     }
   };
 
+  
 
   return (
     <View>
@@ -57,12 +58,17 @@ export default function SearchScreen({ navigation  }: RootTabScreenProps<'TabSea
     </View>
           <SafeAreaView>
               <FlatList
-                refreshing={true}
                 data={elements}
                 renderItem={CardItem}
                 keyExtractor={({ id }) => id}
                 // onEndReached={loadData}
                 // onEndReachedThreshold={0.1}
+                  refreshing={refreshing}
+                  onRefresh={async () => {
+                  setRefreshing(true);
+                  await loadData();
+                  setRefreshing(false);
+                }}
               />
           </SafeAreaView>
     </View>

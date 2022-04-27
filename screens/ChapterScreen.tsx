@@ -6,6 +6,7 @@ import { getData } from '../config/main';
 import { useEffect, useState } from 'react';
 import { ActivityIndicator } from 'react-native-paper';
 import { URL_PATH } from '../config/main';
+import { Loader } from '../components/Accesories';
 
 
 
@@ -34,14 +35,10 @@ export default function ChapterScreen({ route, navigation }: RootTabScreenProps<
 
 
 
-  if (!itemget.data) {
-    return (
-      <View>
-          <ActivityIndicator style={ StyleSheet.create({flex: 1, top: 150}) } />
-      </View>
-    );
-  }
 
+  if (!itemget.data) {
+    return (<Loader />);
+  }
 
 
   return (

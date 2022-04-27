@@ -6,6 +6,7 @@ import { URL_PATH } from '../config/main'
 import { useEffect, useState, useLayoutEffect } from "react";
 import { getData } from '../config/main';
 import { View } from '../components/Themed';
+import { Loader } from '../components/Accesories';
 
 
 export default function DetailScreen({ route, navigation }: RootTabScreenProps<'TabDetails'>) {
@@ -46,13 +47,8 @@ const urlToItem: any = URL_PATH + '/'+route.params.typeSearch+'/' + route.params
     };
 
     if (!itemget.data) {
-      return (
-        <View>
-            <ActivityIndicator style={ StyleSheet.create({flex: 1, top: 150}) } />
-        </View>
-      );
+      return (<Loader />);
     }
-
 
 
     return (

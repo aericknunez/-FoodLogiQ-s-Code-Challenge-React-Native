@@ -13,14 +13,14 @@ import { SearchParamList } from '../../types'
   
 export default function ItemHome(props: home): JSX.Element {
     
-    const navigation = useNavigation<SearchParamList, 'TabSearch'>(); 
+    const navigation = useNavigation<SearchParamList, 'SelectScreen'>(); 
     const type = props.name.toLowerCase() ;
         return (
 
             <View style={[tw`mt-8 mx-4`]}>
                 <TouchableOpacity
                     onPress={() =>
-                        navigation.navigate('TabSearch', {
+                        navigation.navigate('SelectScreen', {
                             typeContent: type,
                         })
                     }

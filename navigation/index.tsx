@@ -13,10 +13,12 @@ import ModalScreen from '../screens/ModalScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
 import HomeScreen from '../screens/HomeScreen';
 import DetailScreen from '../screens/DetailScreen';
-import SearchScreen from '../screens/SearchScreen'
 import FavoritesScreen from '../screens/FavoritesScreen';
-import CategoryScreen from '../screens/CategoryScreen';
 import ChapterScreen from '../screens/ChapterScreen';
+import SelectScreen from '../screens/SelectScreen';
+import AllScreen from '../screens/AllScreen';
+import SearchScreen from '../screens/SearchScreen';
+
 
 
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
@@ -43,9 +45,10 @@ function RootNavigator() {
     <Stack.Navigator>
       <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
-      <Stack.Screen name="TabSearch" component={SearchScreen} options={{ title: 'Rated' }} />
+      <Stack.Screen name="SelectScreen" component={SelectScreen} options={{ title: 'Rated' }} />
       <Stack.Screen name="TabDetails" component={DetailScreen} options={{ title: 'Details' }} />
       <Stack.Screen name="TabChapter" component={ChapterScreen} options={{ title: 'Chapter' }} />
+      <Stack.Screen name="AllScreen" component={AllScreen} options={{ title: 'All' }} />
 
 
       {/* <Stack.Group screenOptions={{ presentation: 'modal' }}>
@@ -75,10 +78,10 @@ function BottomTabNavigator() {
 
 
       <BottomTab.Screen
-        name="TabCategory"
-        component={CategoryScreen}
+        name="TabSearch"
+        component={SearchScreen}
         options={{
-          title: 'ALL ANIME',
+          title: 'SEARCH',
           tabBarIcon: ({ color }) => <TabBarIcon name="search" color={color} />,
         }}
       />     

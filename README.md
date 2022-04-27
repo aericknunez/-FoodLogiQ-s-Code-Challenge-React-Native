@@ -63,9 +63,12 @@ Enjoy!
 
 
 
-## Acknowledgements
+## Installed libraries
 
- - [Awesome Readme Templates](https://awesomeopensource.com/project/elangosundar/awesome-README-templates)
- - [Awesome README](https://github.com/matiassingers/awesome-readme)
- - [How to write a Good readme](https://bulldogjob.com/news/449-how-to-write-a-good-readme-for-your-github-project)
+ - [Tailwind React Native](https://github.com/vadimdemedes/tailwind-rn)
+ - [Material Design for React Native.](https://callstack.github.io/react-native-paper/)
+ - [MobX-State-Tree](https://mobx-state-tree.js.org/intro/welcome)
+ - [Expo for React Native](https://expo.dev/)
+ - [Async Storage](https://github.com/react-native-async-storage/async-storage)
+ - [TypeScript](TypeScript)
 

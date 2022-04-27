@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Image, StyleSheet, FlatList, TouchableOpacity, Linking } from 'react-native'
+import { Image, StyleSheet } from 'react-native'
 
 import { Text, View } from '../../components/Themed'
 import tw from 'tailwind-react-native-classnames';

@@ -1,4 +1,4 @@
-import { ScrollView, StyleSheet, ActivityIndicator  } from 'react-native';
+import { ScrollView  } from 'react-native';
 import React from "react";
 import { RootTabScreenProps } from '../types';
 import DetailsItem from './details/DetailsItem';
@@ -10,9 +10,6 @@ import { Loader } from '../components/Accesories';
 
 
 export default function DetailScreen({ route, navigation }: RootTabScreenProps<'TabDetails'>) {
-
-// const urlToPopular: any = URL_PATH + '/categories/1/' + typeContent + '?page%5Blimit%5D=20';
-// https://kitsu.io/api/edge/manga/1
 
 const urlToItem: any = URL_PATH + '/'+route.params.typeSearch+'/' + route.params.typeContent;
 

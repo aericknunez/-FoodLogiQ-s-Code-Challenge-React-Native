@@ -6,7 +6,6 @@ import Colors from '../../constants/Colors'
 import { Text, useThemeColor } from '../../components/Themed'
 
 
-// const LeftContent = props => <Avatar.Icon {...props} icon="folder" />
 
 
 export default function Related() {

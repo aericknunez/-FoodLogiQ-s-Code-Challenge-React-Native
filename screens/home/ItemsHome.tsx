@@ -1,7 +1,5 @@
 import * as React from 'react'
 import { View, Image, StyleSheet, TouchableOpacity } from 'react-native'
-import {  Avatar, Button, Card, Title, Paragraph } from 'react-native-paper'
-import Screen from '../Screen'
 import { Text } from '../../components/Themed'
 import tw from 'tailwind-react-native-classnames';
 

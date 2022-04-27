@@ -103,8 +103,7 @@ export default function ItemCard({ typeContent }: any) {
         )
       }
 
-      // console.log(popular.data)
-      // console.log(treding.data)
+
   return (
     <Screen scroll>
       <TouchableOpacity

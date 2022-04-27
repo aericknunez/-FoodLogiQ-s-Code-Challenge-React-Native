@@ -1,12 +1,10 @@
 
-import { View, ActivityIndicator, FlatList, StyleSheet, TouchableOpacity, Image, Text  } from 'react-native';
+import { View, ActivityIndicator, FlatList, TouchableOpacity, Image, Text  } from 'react-native';
 import React, { useState, useEffect, useMemo } from "react";
 import { RootTabScreenProps } from '../types';
 import { getData } from '../config/main';
 import { URL_PATH } from '../config/main';
 import tw from 'tailwind-react-native-classnames';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { STORAGE } from '../config/main';
 import { Loader } from '../components/Accesories';
 
 export default function AllScreen({ route, navigation }: RootTabScreenProps<'TabAll'>) {
@@ -19,7 +17,6 @@ export default function AllScreen({ route, navigation }: RootTabScreenProps<'Tab
   const [isLoading, setIsLoading] = useState(false);
 
 
-  // Se crea la funcion para obtener los datos de la api
   const loadData = async () => {
     try {
       setIsLoading(true);
@@ -33,26 +30,20 @@ export default function AllScreen({ route, navigation }: RootTabScreenProps<'Tab
     }
   };
 
-  /// cargar los datos
 
-  // useEffect(() => {(async () => { await loadData(); })}, [urlsearch]);
   useEffect(() => {(async () => { await loadData() })()}, [urlsearch]);
 
 
 
-  // buscar mas elementos
   const loadMoreItem = () => {
-    // setCurrentPage(currentPage + 1);
     console.log(urlsearch)
   };
 
 
-  // render loading
   const renderLoader = () => {
     return ( isLoading ? <Loader /> : null);
   };
 
-  // Render itemss
   const renderItem = ({ item }: any) => {
     return (
       <View>
@@ -79,15 +70,6 @@ export default function AllScreen({ route, navigation }: RootTabScreenProps<'Tab
 )
   };
 
-
-// / Savign data on local storage
-  // const storeData = async (value:any) => {
-  //   try {
-  //     await AsyncStorage.setItem('STORAGE', value)
-  //   } catch (e) {
-  //     console.log(e)
-  //   }
-  // }
 
   const memoizedValue = useMemo(() => renderItem, [elements]);
   return (

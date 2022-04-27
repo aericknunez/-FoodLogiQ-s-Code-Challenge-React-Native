@@ -49,13 +49,6 @@ function RootNavigator() {
       <Stack.Screen name="TabDetails" component={DetailScreen} options={{ title: 'Details' }} />
       <Stack.Screen name="TabChapter" component={ChapterScreen} options={{ title: 'Chapter' }} />
       <Stack.Screen name="AllScreen" component={AllScreen} options={{ title: 'All' }} />
-
-
-      {/* <Stack.Group screenOptions={{ presentation: 'modal' }}>
-        <Stack.Screen name="Modal" component={ModalScreen} />
-      </Stack.Group> */}
-      <Stack.Screen name="Modal" component={ModalScreen} options={{ title: 'Details' }}  />
-
     </Stack.Navigator>
   );
 }

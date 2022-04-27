@@ -16,13 +16,6 @@ export default function SearchScreen({ navigation  }: RootTabScreenProps<'TabSea
   const [urlsearch, setUrlsearch] = useState("");
 
 
-  // useEffect(() => {
-  //   (async () => {
-  //     await loadData();
-  //   })();
-  // }, []);
-
-
   const loadData = async () => {
     try {
       const response = await getData(urlsearch);
@@ -61,8 +54,6 @@ export default function SearchScreen({ navigation  }: RootTabScreenProps<'TabSea
                 data={elements}
                 renderItem={CardItem}
                 keyExtractor={({ id }) => id}
-                // onEndReached={loadData}
-                // onEndReachedThreshold={0.1}
                   refreshing={refreshing}
                   onRefresh={async () => {
                   setRefreshing(true);

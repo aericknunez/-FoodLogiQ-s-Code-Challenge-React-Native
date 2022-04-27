@@ -4,7 +4,7 @@ import tw from 'tailwind-react-native-classnames'
 import { useNavigation } from '@react-navigation/native';
 
 // OJO OJO OJO OJO
-// QUIZA SEA ELIMINADA ESTA SCREEN 
+// ELIMINAR EL COMPONENTE
 
 
 export default function ItemCard({ item }: any) {

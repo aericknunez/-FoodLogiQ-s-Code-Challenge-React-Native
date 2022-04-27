@@ -1,4 +1,4 @@
-import { StyleSheet, SafeAreaView, Text, View  } from 'react-native';
+import { StyleSheet, SafeAreaView } from 'react-native';
 import React from 'react';
 import { RootTabScreenProps } from '../types';
 import ChapterDetail from './chapter/ChapterDetail';

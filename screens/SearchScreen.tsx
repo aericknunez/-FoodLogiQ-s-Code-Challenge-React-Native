@@ -5,6 +5,7 @@ import { getData } from '../config/main';
 import { URL_PATH } from '../config/main';
 import CardItem from './search/CardItem';
 import tw from 'tailwind-react-native-classnames';
+import { Loader } from '../components/Accesories';
 
 
 export default function SearchScreen({ navigation  }: RootTabScreenProps<'TabSearch'>) {
@@ -12,19 +13,19 @@ export default function SearchScreen({ navigation  }: RootTabScreenProps<'TabSea
 
   const [elements, setElements] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
-  const [search, setSearch] = useState("");
-  const [urlsearch, setUrlsearch] = useState("");
 
 
-  const loadData = async () => {
+  const loadData = async (url) => {
     try {
-      const response = await getData(urlsearch);
+      setRefreshing(true)
+      const response = await getData(url);
       setElements(response);
-      console.log(elements)
+      setRefreshing(false)
     } catch (error) {
       console.error(error);
     }
   };
+
 
   
 
@@ -38,30 +39,21 @@ export default function SearchScreen({ navigation  }: RootTabScreenProps<'TabSea
                   placeholder="Search a Element"
                   placeholderTextColor="#858585"
                   onChangeText={(text) => {
-                    setUrlsearch(URL_PATH + "/anime?filter[text]="+ text)
+                    loadData(URL_PATH + "/anime?filter[text]="+ text)
                   }}
                 />
-              <TouchableOpacity 
-                onPress={ loadData }
-              >
-                <Text style={[tw`w-20 px-6 py-2.5 bg-blue-600 justify-center items-center text-white font-medium text-xs uppercase rounded shadow-md`]}>GO</Text>
-              </TouchableOpacity>
         </View>
         </View>
     </View>
-          <SafeAreaView>
-              <FlatList
-                data={elements}
-                renderItem={CardItem}
-                keyExtractor={({ id }) => id}
-                  refreshing={refreshing}
-                  onRefresh={async () => {
-                  setRefreshing(true);
-                  await loadData();
-                  setRefreshing(false);
-                }}
-              />
-          </SafeAreaView>
+          <View>
+            <FlatList
+              data={elements.data}
+              initialNumToRender={4}
+              renderItem={CardItem}
+              keyExtractor={item => item.id}
+              onEndReachedThreshold={0}
+            />
+          </View>
     </View>
   );
 }

@@ -3,16 +3,14 @@ import {View, TouchableOpacity, Image, Text } from 'react-native'
 import tw from 'tailwind-react-native-classnames'
 import { useNavigation } from '@react-navigation/native';
 
-// OJO OJO OJO OJO
-// ELIMINAR EL COMPONENTE
-
 
 export default function ItemCard({ item }: any) {
   
 //   const navigation = useNavigation<SearchParamList, 'TabDetails'>(); 
 
 
-        return (
+        return ( 
+                // <Text>{ item.attributes.canonicalTitle ? item.attributes.canonicalTitle : 'UnKnow' }</Text>
                 <View>
                 <TouchableOpacity
                     //   onPress={() =>
